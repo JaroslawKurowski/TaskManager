@@ -11,13 +11,14 @@ namespace TaskManager.BusinessLogic
         private static int _id;
         public int Id { get; }
         public string Description { get; set; }
-        public DateTime CreationDate { get; }
+        public DateTime CreationDate { get; } = DateTime.Now;
         public DateTime? DueDate { get; set; }
         public DateTime? StartDate { get; private set; }
         public DateTime? DoneDate { get; private set; }
         public TaskStatus Status { get; private set; } = TaskStatus.ToDo;
         public TimeSpan? Duration => StartDate != null ? (DoneDate ?? DateTime.Now) - StartDate.Value : null;
         //public TimeSpan Duration => StartDate != null ? (DoneDate ?? DateTime.Now) - StartDate.Value : TimeSpan.Zero;
+        // null propagation - sprawdzić
 
         public Task(string description, DateTime? dueDate)
         {
