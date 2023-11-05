@@ -13,17 +13,17 @@ namespace TaskManager.BusinessLogic
 
         public Task Add(string description, DateTime? dueDate = null)
         {
-            var newTask = new Task(description, dueDate);
-            _tasks.Add(newTask);
-            return newTask;
+            var task = new Task(description, dueDate);
+            _tasks.Add(task);
+            return task;
         }
 
         public bool Remove(int taskId)
         {
-            var task = Get(taskId);
-            if (task != null)
+            var taskToRemove = _tasks.Find(t => t.Id == taskId);
+            if (taskToRemove != null)
             {
-                _tasks.Remove(task);
+                _tasks.Remove(taskToRemove);
                 return true;
             }
             return false;
@@ -32,6 +32,43 @@ namespace TaskManager.BusinessLogic
         public Task Get(int taskId)
         {
             return _tasks.Find(t => t.Id == taskId);  // pobiera zadanie o podanym ID z listy
+        }
+
+        public Task[] GetAll()
+        {
+            //throw new NotImplementedException("Na razie nie obsługujemy tej funkcji. Do zaimplementowania później.");
+            return _tasks.ToArray();
+        }
+
+        public Task[] GetAll(TaskStatus status)
+        {
+            return _tasks.FindAll(t => t.Status == status).ToArray();
+        }
+
+        public Task[] GetAll(string description)
+        {
+            return _tasks.FindAll(t => t.Description.Contains(description)).ToArray();
+        }
+
+        public bool ChangeStatus(int taskId, TaskStatus newStatus)
+        {
+            var taskToChange = Get(taskId);
+            if (taskToChange == null || taskToChange?.Status == newStatus)
+            {
+                return false;
+            }
+
+            switch (newStatus)
+            {
+                case TaskStatus.ToDo:
+                    return taskToChange.Open();
+                case TaskStatus.InProgress:
+                    return taskToChange.Start();
+                case TaskStatus.Done:
+                    return taskToChange.Done();
+                default:
+                    return false;
+            }
         }
     }
 }

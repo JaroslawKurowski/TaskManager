@@ -30,7 +30,7 @@ namespace TaskManager.BusinessLogic
 
         public bool Start()
         {
-            if (Status == TaskStatus.ToDo)
+            if (Status != TaskStatus.InProgress)
             {
                 Status = TaskStatus.InProgress;
                 StartDate = DateTime.Now;
