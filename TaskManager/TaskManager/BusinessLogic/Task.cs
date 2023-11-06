@@ -11,7 +11,7 @@ namespace TaskManager.BusinessLogic
         private static int _id;
         public int Id { get; }
         public string Description { get; set; }
-        public DateTime CreationDate { get; } = DateTime.Now;
+        public DateTime CreationDate { get; } // = DateTime.Now;
         public DateTime? DueDate { get; set; }
         public DateTime? StartDate { get; private set; }
         public DateTime? DoneDate { get; private set; }

@@ -11,7 +11,7 @@ namespace TaskManager.BusinessLogic
     {
         private List<Task> _tasks = new List<Task>();
 
-        public Task Add(string description, DateTime? dueDate = null)
+        public Task Add(string description, DateTime? dueDate)
         {
             var task = new Task(description, dueDate);
             _tasks.Add(task);
