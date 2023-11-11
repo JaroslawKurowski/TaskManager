@@ -36,7 +36,6 @@ namespace TaskManager.BusinessLogic
 
         public Task[] GetAll()
         {
-            //throw new NotImplementedException("Na razie nie obsługujemy tej funkcji. Do zaimplementowania później.");
             return _tasks.ToArray();
         }
 
@@ -47,7 +46,7 @@ namespace TaskManager.BusinessLogic
 
         public Task[] GetAll(string description)
         {
-            return _tasks.FindAll(t => t.Description.Contains(description)).ToArray();
+            return _tasks.FindAll(t => t.Description.Contains(description, StringComparison.InvariantCultureIgnoreCase)).ToArray();
         }
 
         public bool ChangeStatus(int taskId, TaskStatus newStatus)
@@ -70,5 +69,7 @@ namespace TaskManager.BusinessLogic
                     return false;
             }
         }
+
+        //throw new NotImplementedException("Na razie nie obsługujemy tej funkcji. Do zaimplementowania później.");
     }
 }

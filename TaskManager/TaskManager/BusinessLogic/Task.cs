@@ -17,8 +17,6 @@ namespace TaskManager.BusinessLogic
         public DateTime? DoneDate { get; private set; }
         public TaskStatus Status { get; private set; } = TaskStatus.ToDo;
         public TimeSpan? Duration => StartDate != null ? (DoneDate ?? DateTime.Now) - StartDate.Value : null;
-        //public TimeSpan Duration => StartDate != null ? (DoneDate ?? DateTime.Now) - StartDate.Value : TimeSpan.Zero;
-        // null propagation - sprawdzić
 
         public Task(string description, DateTime? dueDate)
         {
